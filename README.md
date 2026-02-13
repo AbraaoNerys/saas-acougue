@@ -1,7 +1,20 @@
-Project Saas Açougue 
+# SaaS Açougue API
 
--Bullets 
+Backend SaaS para gestão de açougues utilizando arquitetura hexagonal (Ports and Adapters).
 
-1° registro de login e cadastro ierarquico no qual os sera separa o loginin do gerente , ceo, caixa
+objetivo:
+-controle de estoque 
+-desossa 
+-gestão de produtos 
+-SaaS multi-tenant
 
-2°
+Hexagonal Architecture
+- domain
+- application
+- adapters
+- infrastructure
+
+Stack
+- Node.js
+- TypeScript 
+- Hexagonal Architecture

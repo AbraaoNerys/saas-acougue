@@ -2,44 +2,45 @@ import { Product } from "../../domain/entities/Product.js";
 import type { ProductRepository } from "../ports/out/product.repository.js";
 
 
-type createProductInput = {
+type CreateProductInput = {
     name: string;
-    unidade: "kg" | "un" ;
-    custo: number;
-    margem: number;
+    unit: "kg" | "un"; 
+    cost: number;      
+    margin: number;   
 }
 
-
-type createProductOutput = {
+type CreateProductOutput = {
     name: string;
-    precoVenda:number;
+    salesPrice: number; 
 }
 
 export class CreateProductUseCase {
     constructor(private repository: ProductRepository) {}
 
-    async execute(input: createProductInput): Promise<createProductOutput>{
+    async execute(input: CreateProductInput): Promise<CreateProductOutput> {
+        
         
         const productExists = await this.repository.searchByName(input.name);
 
-        if (productExists){
-            throw new Error("Produto ja cadastrado com esse nome")
+        if (productExists) {
+            throw new Error("Produto já cadastrado com esse nome");
         }
 
+        
         const newProduct = new Product(
             input.name,
-            input.unidade,
-            input.custo,
-            input.margem
+            input.unit,
+            input.cost,
+            input.margin
         );
 
-        await  this.repository.save(newProduct);
+        
+        await this.repository.save(newProduct);
 
+    
         return {
-            name: newProduct.nome,
-            precoVenda: newProduct.precoVenda
+            name: newProduct.name,
+            salesPrice: newProduct.salesPrice
         };
     }
 }
-
-
